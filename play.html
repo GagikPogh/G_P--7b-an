@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="hy">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Յոթ բանալի · Խաղալ հիմա</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="play.css" />
+  </head>
+  <body class="play-page">
+    <canvas class="hero-orbs" aria-hidden="true"></canvas>
+    <header class="site-header">
+      <div class="logo">
+        <img src="assets/logo.png" alt="Յոթ բանալի" />
+        <div class="logo-text">
+          <strong>Յոթ բանալի</strong>
+          <span>Խաղալ հիմա</span>
+        </div>
+      </div>
+      <nav>
+        <a href="index.html">Գլխավոր</a>
+        <a href="#play">Խաղային սենյակ</a>
+        <a href="#leaderboard">Լիդերբորդ</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="section play-interface">
+        <div class="play-layout">
+          <aside class="age-panel">
+            <h3>Ընտրեք տարիքային խումբը</h3>
+            <div class="play-note">
+              Ընտրիր տարիքդ, վաստակիր միավորներ և բարձրացիր մակարդակով։ Յուրաքանչյուր
+              ճիշտ պատասխան տալիս է փորձ և միավորներ։ Գրանցված օգտատերերը
+              հայտնվում են օրվա և շաբաթվա լավագույնների ցուցակում ու պահում են
+              իրենց առաջընթացը։
+            </div>
+            <div class="age-grid" id="ageGrid">
+              <button data-age="3-5">3-5</button>
+              <button data-age="6-8">6-8</button>
+              <button data-age="9-12">9-12</button>
+              <button data-age="12+">12+</button>
+            </div>
+
+            <div class="level-card">
+              <div class="level-ring" id="levelRing">
+                <span class="level-number" id="levelNumber">1</span>
+                <div class="level-label">Մակարդակ</div>
+              </div>
+              <div class="xp-track">
+                <p>Փորձ (XP)</p>
+                <div class="xp-bar">
+                  <div class="xp-fill" id="xpFill"></div>
+                </div>
+                <small id="xpText">0 / 150 XP</small>
+              </div>
+            </div>
+
+            <div class="register-banner">
+              <p>
+                Ցանկանու՞մ եք երևալ օրվա/շաբաթվա լավագույնների ցանկում և պահել
+                ձեր առաջընթացը։
+              </p>
+              <button class="btn primary" id="registerButton">Գրանցվել</button>
+              <small>Գրանցումը պահվում է միայն ձեր սարքում (local save).</small>
+            </div>
+          </aside>
+
+          <section class="question-panel">
+            <div class="question-header">
+              <div class="score-pill">
+                Միավորներ
+                <strong id="scoreCount">0</strong>
+              </div>
+              <div class="combo-pill" id="comboText">Ընտրեք տարիքային խումբ</div>
+            </div>
+
+            <div class="question-card" id="questionCard">
+              <p class="question-age" id="questionAge">-</p>
+              <h3 id="questionText">Սկսելու համար ընտրեք տարիքային խումբը</h3>
+              <div class="question-options" id="optionsContainer"></div>
+              <div class="question-input" id="inputContainer"></div>
+              <div class="question-actions">
+                <button class="btn primary" id="submitAnswer" disabled>
+                  Ստուգել պատասխանը
+                </button>
+                <button class="btn secondary" id="nextQuestion" disabled>
+                  Հաջորդ հարց
+                </button>
+              </div>
+              <div class="question-feedback" id="questionFeedback"></div>
+            </div>
+          </section>
+
+          <aside class="leaderboard" id="leaderboard">
+            <h3>Օրվա լավագույն խաղացողները</h3>
+            <ol id="dailyBoard" class="leaderboard-list"></ol>
+            <h3>Շաբաթվա լավագույն խաղացողները</h3>
+            <ol id="weeklyBoard" class="leaderboard-list"></ol>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section mini-games-section" id="miniGames">
+        <div class="section-heading">
+          <p class="eyebrow">Զարգացնող խաղեր</p>
+          <h2>Առանձին մինի-խաղեր երեխաների համար</h2>
+          <p>Ընտրեք խաղ և զարգացրեք ձեր հմտությունները</p>
+        </div>
+        <div class="mini-games-grid">
+          <div class="mini-game-card" data-game="colors">
+            <div class="mini-game-icon">🎨</div>
+            <h3>Գույների խաղ</h3>
+            <p>Ընտրիր ճիշտ գույնը</p>
+            <button class="btn primary mini-game-btn">Խաղալ</button>
+          </div>
+          <div class="mini-game-card" data-game="shapes">
+            <div class="mini-game-icon">🔷</div>
+            <h3>Ձևերի խաղ</h3>
+            <p>Գտիր նույն ձևերը</p>
+            <button class="btn primary mini-game-btn">Խաղալ</button>
+          </div>
+          <div class="mini-game-card" data-game="counting">
+            <div class="mini-game-icon">🔢</div>
+            <h3>Հաշվարկի խաղ</h3>
+            <p>Հաշվիր առարկաները</p>
+            <button class="btn primary mini-game-btn">Խաղալ</button>
+          </div>
+          <div class="mini-game-card" data-game="animals">
+            <div class="mini-game-icon">🐾</div>
+            <h3>Կենդանիների խաղ</h3>
+            <p>Ճանաչիր կենդանիներին</p>
+            <button class="btn primary mini-game-btn">Խաղալ</button>
+          </div>
+          <div class="mini-game-card" data-game="memory">
+            <div class="mini-game-icon">🧠</div>
+            <h3>Հիշողության խաղ</h3>
+            <p>Հիշիր և գտիր զույգերը</p>
+            <button class="btn primary mini-game-btn">Խաղալ</button>
+          </div>
+        </div>
+        <div class="mini-game-modal" id="miniGameModal">
+          <div class="mini-game-content">
+            <button class="close-modal" id="closeModal">×</button>
+            <div id="miniGameContainer"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section play-hero" id="play">
+        <div class="section-heading">
+          <p class="eyebrow">Օնլայն սենյակ · Յոթ բանալի</p>
+          <h1>Ընտրիր տարիքդ, վաստակիր միավորներ ու բարձրացիր մակարդակով</h1>
+          <p>
+            Յուրաքանչյուր ճիշտ պատասխան քեզ տալիս է փորձ և միավորներ։ Օրվա և
+            շաբաթվա լավագույն խաղացողների ցուցակում հայտնվելու համար անհրաժեշտ է
+            գրանցվել և պահել առաջընթացը։
+          </p>
+          <div class="play-notice">
+            <strong>Կարևոր է.</strong> գրանցված խաղացողներն են տեսնում իրենց
+            անունը տոպում և կարողանում են շարունակել այնտեղից, որտեղ կանգ են
+            առել։
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>© 2025 Յոթ բանալի</div>
+      <div class="footer-links">
+        <a href="index.html">Գլխավոր</a>
+        <a href="tel:+37455126363">+374 55 12 63 63</a>
+        <a href="https://www.facebook.com/7banali" target="_blank" rel="noreferrer"
+          >Facebook</a
+        >
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="play.js"></script>
+  </body>
+</html>
+
